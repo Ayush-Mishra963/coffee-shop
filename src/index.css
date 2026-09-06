@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-espresso-lighter;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-espresso text-bone font-body antialiased;
+  }
+  ::selection {
+    @apply bg-brass text-espresso;
+  }
+  :focus-visible {
+    outline: 2px solid #c08552;
+    outline-offset: 3px;
+  }
+}
+
+/* Hide the native pointer on desktop, where the custom cursor takes over */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a,
+  button {
+    cursor: none;
+  }
+}
+
+/* Respect reduced motion preference globally */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Faint film-grain texture + edge vignette, used by <GrainOverlay />.
+   Purely decorative, tiny inline SVG so no extra asset/request is needed. */
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 120px 120px;
+}
