@@ -77,29 +77,20 @@ export default function Gallery() {
         {PHOTOS.map((photo, i) => (
           <motion.figure
             key={photo.src}
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ delay: i * 0.06 }}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
             data-cursor="hover"
             className={`group relative col-span-1 h-64 overflow-hidden rounded-2xl sm:h-auto ${photo.span}`}
           >
             <motion.div
-              initial={{ clipPath: "inset(100% 0 0 0)" }}
-              whileInView={{ clipPath: "inset(0% 0 0 0)" }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{
-                duration: 0.9,
-                ease: [0.22, 1, 0.36, 1],
-                delay: i * 0.06,
-              }}
+              initial={{ clipPath: "inset(0% 0 0 0)" }}
+              animate={{ clipPath: "inset(0% 0 0 0)" }}
               className="absolute inset-0"
             >
               <motion.img
                 src={photo.src}
                 alt={photo.caption}
-                loading="lazy"
+                loading="eager"
                 className="h-full w-full object-cover"
                 whileHover={{ scale: 1.08 }}
                 transition={{
